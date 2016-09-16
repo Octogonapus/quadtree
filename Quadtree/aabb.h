@@ -13,10 +13,18 @@ public:
 
 	inline const bool intersectWithPoint(const Point& other) const
 	{
-		return !(getMaxExtents().x < other.getX() ||
-				 getMaxExtents().y < other.getY() ||
-				 getMinExtents().x > other.getX() ||
-				 getMinExtents().y > other.getY());
+		return !(getMaxExtents()[0] < other.getX() ||
+				 getMaxExtents()[1] < other.getY() ||
+				 getMinExtents()[0] > other.getX() ||
+				 getMinExtents()[1] > other.getY());
+	}
+
+	inline const bool intersectWithAABB(const AABB& other) const
+	{
+		return !(getMaxExtents()[0] < other.getMinExtents()[0] ||
+				 getMaxExtents()[1] < other.getMinExtents()[1] ||
+				 getMinExtents()[0] > other.getMaxExtents()[0] ||
+				 getMinExtents()[1] > other.getMaxExtents()[1]);
 	}
 
 	//Get coordinates of bottom right point
